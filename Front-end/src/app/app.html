@@ -1,0 +1,13 @@
+<h1> O Melhor encurtador de URL </h1>
+<input type="text" placeholder="URL" [(ngModel)]="url">
+<button (click)="shortenUrl(url, password)">Encurtar</button>
+<input type="checkbox" [(ngModel)]="as_password">
+<span>Proteger com senha</span>
+<input type="checkbox" [(ngModel)]="as_timer">
+<span>timer</span>
+
+
+<input type="text" placeholder="Senha" *ngIf="as_password" [(ngModel)]="password">
+<input type="number" placeholder="Tempo" *ngIf="as_timer" [(ngModel)]="timer">
+
+<router-outlet></router-outlet>
