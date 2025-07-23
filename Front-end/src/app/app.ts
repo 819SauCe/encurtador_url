@@ -17,6 +17,7 @@ export class App {
   public as_timer = false;
   public password = '';
   public timer = 0;
+  public shortUrl = '';
 
   verifyPassword() {
     console.log("Verify password");

@@ -12,15 +12,18 @@ public class Url {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true, name = "original_url")
     private String url;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true, name = "short_url")
     private String shortUrl;
 
-    @Column(nullable = true)
+    @Column(nullable = true, name = "password")
     private String password;
 
-    @Column(nullable = true)
+    @Column(nullable = true, name = "timer")
+    private Integer timer;
+
+    @Column(nullable = false, name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 }
