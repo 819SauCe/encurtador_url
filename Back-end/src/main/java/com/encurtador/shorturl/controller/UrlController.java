@@ -23,7 +23,7 @@ public class UrlController {
     @GetMapping("/{shortCode}")
     public ResponseEntity<String> redirectToOriginal(@PathVariable String shortCode) {
         return urlService.getOriginalUrl(shortCode)
-                .map(url -> ResponseEntity.ok(url.getUrl()))
+                .map(url -> ResponseEntity.ok(url.getOriginalUrl()))
                 .orElse(ResponseEntity.notFound().build());
     }
 }

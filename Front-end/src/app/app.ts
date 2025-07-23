@@ -18,34 +18,31 @@ export class App {
   public password = '';
   public timer = 0;
   public shortUrl = '';
-
-  verifyPassword() {
-    console.log("Verify password");
-    if (this.as_password === false) {
-      this.password = '';
-    }
-  }
-
-  verifyTimer() {
-    console.log("Verify timer");
-    if (this.as_timer === false) {
-      this.timer = 0;
-    }
-  }
+  public host = 'http://localhost:8080';
+  public error = false;
+  public error_desc = '';
 
   shortenUrl(url: string, password: string) {
-    this.verifyPassword();
-    this.verifyTimer();
-
     const finalPassword = this.as_password ? this.password : '';
     const finalTimer = this.as_timer ? this.timer : 0;
 
-    fetch('http://localhost:8080/api/shorten', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url, password: finalPassword, timer: finalTimer })
-    });
+    if (url.includes(".") && (url.includes("www") || url.includes("http"))) {
+      fetch('http://localhost:8080/api/shorten', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ "originalUrl":url, "password": finalPassword, "timer": finalTimer })
+      })
+      .then(res => res.text())
+      .then(text => {const data = JSON.parse(text);this.shortUrl = this.host + '/' + data.shortUrl;})
+      .catch(err => console.error('Erro:', err));
+    }else {
+      this.error = true;
+      this.error_desc = 'URL inválida';
 
-    console.log("sended");
+      setTimeout(() => {
+        this.error = false;
+        this.error_desc = '';
+      }, 3000);
+    } 
   }
 }

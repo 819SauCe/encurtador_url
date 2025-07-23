@@ -13,7 +13,7 @@ public class Url {
     private Long id;
 
     @Column(nullable = false, unique = true, name = "original_url")
-    private String url;
+    private String originalUrl;
 
     @Column(nullable = true, unique = true, name = "short_url")
     private String shortUrl;

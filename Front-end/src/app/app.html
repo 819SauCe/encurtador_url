@@ -1,26 +1,29 @@
-<main>
-    <h1> O Melhor encurtador de URL </h1>
-    <input class="url" type="text" placeholder="URL" [(ngModel)]="url">
-    <button (click)="shortenUrl(url, password)">Encurtar</button>
+<body>
+    <main>
+    <div class="container">
+        <h1>O Melhor Encurtador de URL</h1>
+        <input class="url" type="text" placeholder="URL" [(ngModel)]="url" />
+        <button (click)="shortenUrl(url, password)">Encurtar</button>
 
-    <div class="checkbox-container">
-        <div class="checkbox-div">
-            <input type="checkbox" [(ngModel)]="as_password">
+        <div class="checkbox-container">
+        <label class="checkbox-div">
+            <input type="checkbox" [(ngModel)]="as_password" />
             <span>Proteger com senha</span>
+        </label>
+        <label class="checkbox-div">
+            <input type="checkbox" [(ngModel)]="as_timer" />
+            <span>Timer</span>
+        </label>
         </div>
-        
-        <div class="checkbox-div">
-            <input type="checkbox" [(ngModel)]="as_timer">
-            <span>timer</span>
+
+        <div class="input-container">
+        <input class="password animated-input" type="text" placeholder="Senha" *ngIf="as_password" [(ngModel)]="password"/>
+        <input class="timer animated-input" type="number" placeholder="Tempo" *ngIf="as_timer" [(ngModel)]="timer"/>
         </div>
-    </div>
 
-    <div class="input-container">
-        <input class="password" type="text" placeholder="Senha" *ngIf="as_password" [(ngModel)]="password">
-        <input type="number" placeholder="Tempo" *ngIf="as_timer" [(ngModel)]="timer">
+        <input class="shortUrl" type="text" [(ngModel)]="shortUrl" readonly />
+        <p class="error" *ngIf="error">{{ error_desc }}</p>
     </div>
- 
-    <input class="shortUrl" type="text" [(ngModel)]="shortUrl" readonly>
-
-</main>
-<router-outlet></router-outlet>
+    </main>
+    <router-outlet></router-outlet>
+</body>

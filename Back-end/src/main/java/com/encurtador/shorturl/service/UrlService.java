@@ -17,6 +17,8 @@ public class UrlService {
     }
 
     public Url createShortUrl(Url url) {
+        Optional<Url> existing = urlRepository.findByOriginalUrl(url.getOriginalUrl());
+        if (existing.isPresent()) return existing.get();
         url.setShortUrl(generateShortCode());
         return urlRepository.save(url);
     }
