@@ -4,10 +4,21 @@ services:
   postgres:
     image: postgres
     volumes:
-    - ./Create_db:/docker-entrypoint-initdb.d
+      - ./Create_db:/docker-entrypoint-initdb.d
     environment:
-    - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=postgres
-    - POSTGRES_DB=postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     ports:
-    - "5432:5432"
+      - "5432:5432"
+
+  backend:
+    build: ./Back-end
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    ports:
+      - "8080:8080"

@@ -21,9 +21,9 @@ public class UrlController {
     }
 
     @GetMapping("/{shortCode}")
-    public ResponseEntity<String> redirectToOriginal(@PathVariable String shortCode) {
+    public ResponseEntity<Url> redirectToOriginal(@PathVariable String shortCode) {
         return urlService.getOriginalUrl(shortCode)
-                .map(url -> ResponseEntity.ok(url.getOriginalUrl()))
+                .map(url -> ResponseEntity.ok(url))
                 .orElse(ResponseEntity.notFound().build());
     }
 }

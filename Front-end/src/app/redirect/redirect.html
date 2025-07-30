@@ -1,0 +1,10 @@
+<div class="main">
+  <div class="container" *ngIf="!ready">
+    <form *ngIf="askPassword" (ngSubmit)="checkPassword()" style="display:flex; gap:10px;">
+    <input class="inputPassword" [(ngModel)]="inputPassword" name="password" type="password" placeholder="Senha" required>
+    <button type="submit">Entrar</button>
+    </form>
+    <p class="error" *ngIf="error">{{ error }}</p>
+    <p *ngIf="timerLeft > 0">Aguarde {{timerLeft}}s para acessar.</p>
+  </div>
+</div>
