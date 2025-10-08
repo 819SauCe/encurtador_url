@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS url (
+    id SERIAL PRIMARY KEY,
+    original_url VARCHAR(2048) NOT NULL UNIQUE,
+    short_url VARCHAR(255) UNIQUE,
+    password VARCHAR(255),
+    timer INTEGER,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
